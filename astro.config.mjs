@@ -6,6 +6,22 @@ import icon from 'astro-icon';
 
 export default defineConfig({
   site: 'https://crystodolarvzla.site/',
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            recharts: ['recharts'],
+            radix: ['@radix-ui/react-dialog', '@radix-ui/react-tabs', '@radix-ui/react-select'],
+          },
+        },
+      },
+    },
+  },
   integrations: [
     react(),
     tailwind({
