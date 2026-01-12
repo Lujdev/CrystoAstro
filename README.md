@@ -1,43 +1,84 @@
-# Astro Starter Kit: Minimal
+# CrystoWeb (CrystoDolar)
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+CrystoDolar es una aplicación web moderna desarrollada con **Astro** y **React** para visualizar la cotización del dólar en Venezuela en tiempo real. Obtiene tasas de diversas fuentes (BCV, Binance P2P, etc.) y ofrece herramientas como una calculadora de conversión.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Tecnologías
 
-## 🚀 Project Structure
+Este proyecto utiliza un stack tecnológico moderno optimizado para rendimiento y experiencia de usuario:
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Framework Core:** [Astro](https://astro.build) (Optimizado para contenido estático y rapidez).
+- **UI Library:** [React](https://react.dev) (Para componentes interactivos como la calculadora y tabs).
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com) (Estilizado utilitario y sistema de diseño).
+- **Componentes UI:** [Shadcn/ui](https://ui.shadcn.com) (Componentes accesibles y personalizables).
+- **Gráficos:** [Recharts](https://recharts.org) (Visualización de historial de precios).
+- **Iconos:** [Lucide React](https://lucide.dev) & Google Material Icons.
+- **Tipografía:** [Inter](https://fonts.google.com/specimen/Inter) (Google Fonts).
+
+## 📂 Estructura del Proyecto
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/
+│   ├── calculator/    # Componentes de la calculadora de conversión
+│   ├── history/       # Gráficos y estadísticas históricas
+│   ├── layout/        # Header, Footer, ThemeToggle
+│   ├── rates/         # Cards de tasas, Grid, Tabs y AverageCard
+│   └── ui/            # Componentes base de Shadcn (Button, Card, etc.)
+├── layouts/
+│   └── BaseLayout.astro  # Layout principal con SEO y estilos base
+├── lib/
+│   ├── api.ts         # Cliente API para obtener tasas
+│   ├── format.ts      # Utilidades de formateo de moneda y fechas
+│   └── utils.ts       # Utilidades generales (cn helper)
+├── pages/
+│   ├── index.astro    # Página de inicio
+│   ├── historico.astro # Página de historial
+│   └── terminos.astro  # Términos y condiciones
+├── styles/
+│   └── globals.css    # Variables CSS, temas (Claro/Oscuro) y estilos globales
+└── types/
+    └── rates.ts       # Definiciones de tipos TypeScript
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🛠️ Configuración y Scripts
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Prerrequisitos
+- Node.js (v18+)
+- pnpm (Recomendado)
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Instalación
+```bash
+pnpm install
+```
 
-## 🧞 Commands
+### Desarrollo
+Iniciar el servidor de desarrollo local:
+```bash
+pnpm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+### Construcción (Build)
+Generar la versión de producción estática:
+```bash
+pnpm build
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### Linting y Formateo
+Este proyecto utiliza **Biome** para linting y formateo rápido.
+```bash
+pnpm run check      # Verificar problemas
+pnpm run check:write # Corregir problemas automáticamente
+```
 
-## 👀 Want to learn more?
+## 🌍 SEO y Despliegue
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La aplicación está configurada con:
+- **Sitemap automático:** Generado por `@astrojs/sitemap`.
+- **Robots.txt:** Configurado para indexación.
+- **Datos Estructurados (JSON-LD):** Schema `WebSite` para mejor entendimiento por buscadores.
+- **Meta Tags:** Título, descripción y Open Graph optimizados.
+
+URL de producción: [https://crystodolarvzla.site/](https://crystodolarvzla.site/)
+
+## 🎨 Temas
+Soporte nativo para **Modo Claro** y **Modo Oscuro**, detectando la preferencia del sistema y permitiendo cambio manual.

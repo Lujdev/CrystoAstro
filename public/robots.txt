@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://crystodolar.vercel.app/sitemap-index.xml
+Sitemap: https://crystodolarvzla.site/sitemap-index.xml
