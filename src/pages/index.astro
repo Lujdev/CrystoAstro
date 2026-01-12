@@ -1,0 +1,30 @@
+---
+import { RateTabs } from '../components/rates/RateTabs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchRates } from '../lib/api';
+
+import type { Rate } from '../types/rates';
+
+let rates: Rate[] = [];
+try {
+  rates = await fetchRates();
+} catch (error) {
+  console.error('Error fetching rates:', error);
+}
+---
+
+<BaseLayout
+  title="CrystoWeb - Cotización del Dólar en Venezuela"
+  description="Consulta el precio del dólar en Venezuela hoy. Tasa BCV, Binance P2P y casas de cambio. Calculadora de conversión bolívares a dólares actualizada."
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold mb-2">Cotización del Dólar en Venezuela</h1>
+      <p class="text-muted-foreground">
+        Actualizado en tiempo real - BCV, Binance P2P y más
+      </p>
+    </div>
+    
+    <RateTabs rates={rates} client:load />
+  </main>
+</BaseLayout>

@@ -1,0 +1,52 @@
+
+> crystoweb@0.0.1 build C:\Users\luisj\Desktop\CrystoApp\crystoweb
+> astro build
+
+[2m17:41:48[22m [34m[content][39m Syncing content
+[2m17:41:48[22m [34m[content][39m Synced content
+[2m17:41:48[22m [34m[types][39m Generated [2m62ms[22m
+[2m17:41:48[22m [34m[build][39m output: [34m"static"[39m
+[2m17:41:48[22m [34m[build][39m mode: [34m"static"[39m
+[2m17:41:48[22m [34m[build][39m directory: [34mC:\Users\luisj\Desktop\CrystoApp\crystoweb\dist\[39m
+[2m17:41:48[22m [34m[build][39m Collecting build info...
+[2m17:41:48[22m [34m[build][39m [32mÔ£ô Completed in 172ms.[39m
+[2m17:41:48[22m [34m[build][39m Building static entrypoints...
+[2m17:41:49[22m [34m[vite][39m [32mÔ£ô built in 1.31s[39m
+[2m17:41:49[22m [34m[build][39m [32mÔ£ô Completed in 1.34s.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m17:41:49[22m [34m[vite][39m transforming...
+[2m17:41:54[22m [34m[vite][39m [32mÔ£ô[39m 3245 modules transformed.
+[2m17:41:55[22m [34m[vite][39m rendering chunks...
+[2m17:41:55[22m [34m[vite][39m computing gzip size...
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/ThemeToggle.CDETA1Kt.js       [39m[1m[2m  0.64 kB[22m[1m[22m[2m Ôöé gzip:   0.40 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/button.Ds1JPM1X.js            [39m[1m[2m  3.60 kB[22m[1m[22m[2m Ôöé gzip:   1.62 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.4ifBoAec.js             [39m[1m[2m  3.89 kB[22m[1m[22m[2m Ôöé gzip:   1.52 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/card.1qSuponh.js              [39m[1m[2m  6.88 kB[22m[1m[22m[2m Ôöé gzip:   2.89 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.Da02gyCa.js             [39m[1m[2m  8.37 kB[22m[1m[22m[2m Ôöé gzip:   3.28 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/RateTabs.QCLC1rXQ.js          [39m[1m[2m 11.59 kB[22m[1m[22m[2m Ôöé gzip:   4.17 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/utils.CN5Pyt6j.js             [39m[1m[2m 26.65 kB[22m[1m[22m[2m Ôöé gzip:   8.76 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/client.SlIoTHO_.js            [39m[1m[2m182.74 kB[22m[1m[22m[2m Ôöé gzip:  57.60 kB[22m
+[2m17:41:55[22m [34m[vite][39m [2mdist/[22m[36m_astro/HistoryContainer.hEtw7dpq.js  [39m[1m[2m439.48 kB[22m[1m[22m[2m Ôöé gzip: 135.14 kB[22m
+[2m17:41:55[22m [34m[vite][39m [32mÔ£ô built in 5.33s[39m
+
+[42m[30m generating static routes [39m[49m
+[2m17:41:58[22m [32mÔûÂ[39m src/pages/historico.astro
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[2m17:41:58[22m   [34mÔööÔöÇ[39m [2m/historico/index.html[22m [2m(+50ms)[22m 
+[2m17:41:58[22m [32mÔûÂ[39m src/pages/index.astro
+fetch failed
+  Stack trace:
+    at node:internal/deps/undici/undici:14900:13
+    at async fetchRates (file:///C:/Users/luisj/Desktop/CrystoApp/crystoweb/dist/chunks/BaseLayout_Cgi06ksF.mjs:13:15)
+    at async callComponentAsTemplateResultOrResponse (file:///C:/Users/luisj/Desktop/CrystoApp/crystoweb/node_modules/.pnpm/astro@5.16.9_@types+node@25_7519c3d55855711cc1b56faa3fb3abd2/node_modules/astro/dist/runtime/server/render/astro/render.js:96:25)
+    at async renderPage (file:///C:/Users/luisj/Desktop/CrystoApp/crystoweb/node_modules/.pnpm/astro@5.16.9_@types+node@25_7519c3d55855711cc1b56faa3fb3abd2/node_modules/astro/dist/runtime/server/render/page.js:49:12)
+    at async NOOP_MIDDLEWARE_FN (file:///C:/Users/luisj/Desktop/CrystoApp/crystoweb/node_modules/.pnpm/astro@5.16.9_@types+node@25_7519c3d55855711cc1b56faa3fb3abd2/node_modules/astro/dist/core/middleware/noop-middleware.js:3:20)
+  Caused by:
+  
+    at internalConnectMultiple (node:net:1134:18)
+    at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2m17:41:58[22m   [34mÔööÔöÇ[39m [2m/index.html[22mÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

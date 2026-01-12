@@ -1,0 +1,20 @@
+---
+import { HistoryContainer } from '../components/history/HistoryContainer';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Histórico de Precios - CrystoWeb"
+  description="Histórico de precios del dólar en Venezuela. Gráficos interactivos de BCV, Binance y más."
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">Histórico de Precios</h1>
+      <p class="text-muted-foreground">
+        Analiza la tendencia del dólar en diferentes periodos.
+      </p>
+    </div>
+    
+    <HistoryContainer client:load />
+  </main>
+</BaseLayout>
