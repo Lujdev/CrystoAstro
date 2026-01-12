@@ -17,6 +17,12 @@ export function formatVariation(value: number): string {
   return `${sign}${value.toFixed(2)}%`;
 }
 
+export function getVariationColor(value: number): string {
+  if (value > 0) return 'text-emerald-500';
+  if (value < 0) return 'text-red-500';
+  return 'text-slate-500';
+}
+
 export function formatTimeAgo(date: Date): string {
   const now = new Date();
   const diff = now.getTime() - new Date(date).getTime();

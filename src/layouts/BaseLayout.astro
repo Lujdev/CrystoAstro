@@ -1,7 +1,7 @@
 ---
-import Footer from '../components/layout/Footer.astro';
-import Header from '../components/layout/Header.astro';
-import '../styles/globals.css';
+import Footer from "../components/layout/Footer.astro";
+import Header from "../components/layout/Header.astro";
+import "../styles/globals.css";
 
 interface Props {
   title?: string;
@@ -10,12 +10,15 @@ interface Props {
 }
 
 const {
-  title = 'CrystoWeb - Cotización del Dólar en Venezuela',
-  description = 'Consulta el precio del dólar en Venezuela hoy. Tasa BCV, Binance P2P y casas de cambio.',
-  ogImage = '/og-default.png',
+  title = "CrystoWeb - Cotización del Dólar en Venezuela",
+  description = "Consulta el precio del dólar en Venezuela hoy. Tasa BCV, Binance P2P y casas de cambio.",
+  ogImage = "/og-default.png",
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost:4321');
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || "http://localhost:4321",
+);
 ---
 
 <!doctype html>
@@ -23,58 +26,95 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="keywords" content="dolar venezuela, tasa bcv, dolar hoy, precio dolar, bolivares, calculadora dolar, binance p2p, cotizacion dolar" />
+    <meta
+      name="keywords"
+      content="dolar venezuela, tasa bcv, dolar hoy, precio dolar, bolivares, calculadora dolar, binance p2p, cotizacion dolar"
+    />
     <link rel="canonical" href={canonicalURL} />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "CrystoDolar",
+        "url": "https://crystodolar.vercel.app",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://crystodolar.vercel.app/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    
-     <!-- Theme Script -->
+
+    <!-- Theme Script -->
     <script is:inline>
       const getThemePreference = () => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
       };
-      const isDark = getThemePreference() === 'dark';
-      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-     
-      if (typeof localStorage !== 'undefined') {
+      const isDark = getThemePreference() === "dark";
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+      if (typeof localStorage !== "undefined") {
         const observer = new MutationObserver(() => {
-          const isDark = document.documentElement.classList.contains('dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
         });
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
       }
     </script>
   </head>
-  <body class="min-h-screen bg-background font-sans antialiased flex flex-col">
+  <body
+    class="min-h-screen bg-background font-body text-slate-900 dark:text-white flex flex-col transition-colors duration-300"
+  >
     <Header />
     <div class="flex-1">
-        <slot />
+      <slot />
     </div>
     <Footer />
   </body>

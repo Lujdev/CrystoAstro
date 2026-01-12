@@ -10,7 +10,7 @@ export function RateGrid({ rates }: RateGridProps) {
   const sortedRates = [...rates].sort((a, b) => a.buy_price - b.buy_price);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {sortedRates.map((rate) => (
         <RateCard key={rate.id} rate={rate} />
       ))}

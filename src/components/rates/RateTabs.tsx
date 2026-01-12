@@ -23,25 +23,28 @@ export function RateTabs({ rates }: RateTabsProps) {
   );
 
   return (
-    <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as ExchangeCategory)}>
-      <TabsList className="grid w-full grid-cols-3 max-w-md mx-auto mb-6">
-        <TabsTrigger value="BCV">BCV</TabsTrigger>
-        <TabsTrigger value="Crypto">Crypto</TabsTrigger>
-        <TabsTrigger value="Otras">Otras</TabsTrigger>
-      </TabsList>
+    <div className="space-y-8">
+      {bcvRate && binanceRate && <AverageCard bcvRate={bcvRate} binanceRate={binanceRate} />}
 
-      <TabsContent value="BCV" className="space-y-4">
-        {bcvRate && binanceRate && <AverageCard bcvRate={bcvRate} binanceRate={binanceRate} />}
-        <RateGrid rates={filterRates('BCV')} />
-      </TabsContent>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as ExchangeCategory)}>
+        <TabsList className="grid w-full grid-cols-3 max-w-md mx-auto mb-6">
+          <TabsTrigger value="BCV">BCV</TabsTrigger>
+          <TabsTrigger value="Crypto">Crypto</TabsTrigger>
+          <TabsTrigger value="Otras">Otras</TabsTrigger>
+        </TabsList>
 
-      <TabsContent value="Crypto">
-        <RateGrid rates={filterRates('Crypto')} />
-      </TabsContent>
+        <TabsContent value="BCV" className="space-y-4">
+          <RateGrid rates={filterRates('BCV')} />
+        </TabsContent>
 
-      <TabsContent value="Otras">
-        <RateGrid rates={filterRates('Otras')} />
-      </TabsContent>
-    </Tabs>
+        <TabsContent value="Crypto">
+          <RateGrid rates={filterRates('Crypto')} />
+        </TabsContent>
+
+        <TabsContent value="Otras">
+          <RateGrid rates={filterRates('Otras')} />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }

@@ -4,22 +4,16 @@ const API_BASE = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
 
 export async function fetchRates(): Promise<Rate[]> {
   const res = await fetch(`${API_BASE}/api/v1/rates`);
-  const data: ApiResponse<Rate[]> = await res.json();
-
-  if (data.status === 'success' && data.data) {
-    return data.data;
-  }
-  throw new Error(data.message || 'Error fetching rates');
+  if (!res.ok) throw new Error('Failed to fetch rates');
+  const data = await res.json();
+  return data;
 }
 
 export async function fetchRatesByExchange(exchange: string): Promise<Rate[]> {
   const res = await fetch(`${API_BASE}/api/v1/rates/${exchange.toLowerCase()}`);
-  const data: ApiResponse<Rate[]> = await res.json();
-
-  if (data.status === 'success' && data.data) {
-    return data.data;
-  }
-  throw new Error(data.message || 'Error fetching rates');
+  if (!res.ok) throw new Error('Failed to fetch rates by exchange');
+  const data = await res.json();
+  return data;
 }
 
 export async function fetchHistory(
@@ -27,12 +21,9 @@ export async function fetchHistory(
   days: number = 30,
 ): Promise<RateHistory[]> {
   const res = await fetch(`${API_BASE}/api/v1/rates/history/${exchangeCode}?days=${days}`);
-  const data: ApiResponse<RateHistory[]> = await res.json();
-
-  if (data.status === 'success' && data.data) {
-    return data.data;
-  }
-  throw new Error(data.message || 'Error fetching history');
+  if (!res.ok) throw new Error('Failed to fetch history');
+  const data = await res.json();
+  return data;
 }
 
 export async function fetchHistoryStats(
@@ -44,10 +35,7 @@ export async function fetchHistoryStats(
   const res = await fetch(
     `${API_BASE}/api/v1/rates/history/${exchangeCode}/${pair}/stats?days=${days}`,
   );
-  const data: ApiResponse<HistoryStats> = await res.json();
-
-  if (data.status === 'success' && data.data) {
-    return data.data;
-  }
-  throw new Error(data.message || 'Error fetching stats');
+  if (!res.ok) throw new Error('Failed to fetch stats');
+  const data = await res.json();
+  return data;
 }

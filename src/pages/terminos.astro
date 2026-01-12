@@ -1,0 +1,274 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { AlertTriangle, Scale, Shield, FileText } from "lucide-react";
+---
+
+<BaseLayout title="Términos de Uso | CrystoDolar">
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                Términos de Uso
+            </h1>
+            <p
+                class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+            >
+                Conoce los términos y condiciones que rigen el uso de nuestra
+                plataforma de cotizaciones.
+            </p>
+        </div>
+
+        {/* Important Alert */}
+        <div
+            class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6 mb-12 flex gap-4 items-start"
+        >
+            <AlertTriangle
+                className="w-6 h-6 text-amber-600 dark:text-amber-500 flex-shrink-0 mt-1"
+            />
+            <div>
+                <h3
+                    class="font-semibold text-amber-900 dark:text-amber-400 mb-2"
+                >
+                    Información Importante
+                </h3>
+                <p
+                    class="text-amber-800 dark:text-amber-300/90 text-sm leading-relaxed"
+                >
+                    Las cotizaciones USDT/Bs mostradas son referenciales y
+                    pueden variar según la fuente. Esta plataforma no realiza
+                    operaciones cambiarias ni crypto. Consulta siempre fuentes
+                    oficiales para transacciones importantes.
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="bg-white dark:bg-card border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden"
+        >
+            <div class="p-8 md:p-12 space-y-12">
+                {/* Section 1 */}
+                <section class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg"
+                        >
+                            <Scale
+                                className="w-5 h-5 text-blue-600 dark:text-blue-400"
+                            />
+                        </div>
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white"
+                        >
+                            1. Aceptación de los Términos
+                        </h2>
+                    </div>
+                    <p
+                        class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                    >
+                        Al acceder y utilizar el sitio web CrystoDolar
+                        (www.crystodolarvzla.site), usted acepta estar sujeto a
+                        estos términos de uso y todas las leyes y regulaciones
+                        aplicables. Si no está de acuerdo con alguno de estos
+                        términos, se le prohíbe usar o acceder a este sitio.
+                    </p>
+                </section>
+
+                {/* Section 2 */}
+                <section class="space-y-4">
+                    <h2
+                        class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                    >
+                        2. Propósito del Sitio
+                    </h2>
+                    <p
+                        class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                    >
+                        CrystoDolar es una plataforma informativa que
+                        proporciona cotizaciones de referencia de USDT en
+                        bolívares venezolanos. La información presentada es
+                        únicamente para fines informativos y no constituye
+                        asesoramiento financiero o de inversión.
+                    </p>
+                </section>
+
+                {/* Section 3 */}
+                <section class="space-y-4">
+                    <h2
+                        class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                    >
+                        3. Descargo de Responsabilidad
+                    </h2>
+                    <div class="pl-12">
+                        <p
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed"
+                        >
+                            Las cotizaciones mostradas en CrystoDolar son
+                            referenciales y pueden variar según la fuente y el
+                            momento de consulta. No garantizamos la exactitud,
+                            completitud o actualidad de la información
+                            proporcionada. Los usuarios deben verificar
+                            independientemente cualquier información antes de
+                            tomar decisiones financieras.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Section 4 */}
+                <section class="space-y-4">
+                    <h2
+                        class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                    >
+                        4. Uso Personal
+                    </h2>
+                    <p
+                        class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                    >
+                        Este sitio web es para uso personal y no comercial. No
+                        está permitido reproducir, duplicar, copiar, vender,
+                        revender o explotar cualquier parte del servicio sin
+                        nuestro consentimiento expreso por escrito.
+                    </p>
+                </section>
+
+                {/* Section 5 */}
+                <section class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-lg"
+                        >
+                            <Shield
+                                className="w-5 h-5 text-indigo-600 dark:text-indigo-400"
+                            />
+                        </div>
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white"
+                        >
+                            5. Recopilación de Datos
+                        </h2>
+                    </div>
+                    <p
+                        class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                    >
+                        CrystoDolar puede recopilar información de uso anónima
+                        para mejorar el servicio. No recopilamos información
+                        personal identificable sin el consentimiento explícito
+                        del usuario. Respetamos la privacidad de nuestros
+                        usuarios y cumplimos con las regulaciones aplicables de
+                        protección de datos.
+                    </p>
+                </section>
+
+                {/* Sections 6-10 */}
+                <section class="space-y-8">
+                    <div class="space-y-4">
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                        >
+                            6. Propiedad Intelectual
+                        </h2>
+                        <p
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                        >
+                            Todo el contenido de este sitio web, incluyendo pero
+                            no limitado a texto, gráficos, logotipos, iconos,
+                            imágenes y software, es propiedad de CrystoDolar o
+                            sus proveedores de contenido y está protegido por
+                            las leyes de derechos de autor venezolanas e
+                            internacionales.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                        >
+                            7. Enlaces Externos
+                        </h2>
+                        <p
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                        >
+                            CrystoDolar puede contener enlaces a sitios web de
+                            terceros. No tenemos control sobre el contenido,
+                            políticas de privacidad o prácticas de estos sitios
+                            externos y no asumimos responsabilidad por ellos. Le
+                            recomendamos revisar los términos y políticas de
+                            cualquier sitio web de terceros que visite.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                        >
+                            8. Limitación de Responsabilidad
+                        </h2>
+                        <p
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                        >
+                            En ningún caso CrystoDolar o sus proveedores serán
+                            responsables por daños especiales, incidentales,
+                            indirectos o consecuentes que resulten del uso o la
+                            imposibilidad de usar el sitio web, incluso si
+                            CrystoDolar ha sido notificado de la posibilidad de
+                            tales daños.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2
+                            class="text-xl font-bold text-slate-900 dark:text-white pl-12"
+                        >
+                            9. Jurisdicción
+                        </h2>
+                        <p
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                        >
+                            Estos términos de uso se rigen por las leyes de la
+                            República Bolivariana de Venezuela. Cualquier
+                            disputa relacionada con estos términos estará sujeta
+                            a la jurisdicción exclusiva de los tribunales
+                            venezolanos.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="bg-slate-100 dark:bg-slate-800 p-2 rounded-lg"
+                            >
+                                <FileText
+                                    className="w-5 h-5 text-slate-600 dark:text-slate-400"
+                                />
+                            </div>
+                            <h2
+                                class="text-xl font-bold text-slate-900 dark:text-white"
+                            >
+                                10. Modificaciones
+                            </h2>
+                        </div>
+                        <p
+                            class="text-slate-600 dark:text-slate-400 leading-relaxed pl-12"
+                        >
+                            CrystoDolar se reserva el derecho de revisar estos
+                            términos de uso en cualquier momento sin previo
+                            aviso. Al usar este sitio web, usted acepta estar
+                            sujeto a la versión actual de estos términos de uso.
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div
+                class="bg-slate-50 dark:bg-slate-900/50 p-6 text-center border-t border-slate-100 dark:border-slate-800"
+            >
+                <p class="text-sm text-slate-500">
+                    Última actualización: {
+                        new Date().toLocaleDateString("es-VE", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })
+                    }
+                </p>
+            </div>
+        </div>
+    </main>
+</BaseLayout>
