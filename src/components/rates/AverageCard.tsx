@@ -39,7 +39,7 @@ export function AverageCard({ bcvRate, binanceRate }: AverageCardProps) {
           </div>
 
           <div className="flex flex-col items-center pt-2 pb-4">
-            <span className="text-6xl sm:text-7xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <span className="text-4xl sm:text-7xl font-bold tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
               Bs {formatBs(average)}
             </span>
             <div className={cn(
