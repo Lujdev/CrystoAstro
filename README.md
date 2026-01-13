@@ -1,4 +1,4 @@
-# CrystoWeb (CrystoDolar)
+# CrystoDolar
 
 CrystoDolar es una aplicación web moderna desarrollada con **Astro** y **React** para visualizar la cotización del dólar en Venezuela en tiempo real. Obtiene tasas de diversas fuentes (BCV, Binance P2P, etc.) y ofrece herramientas como una calculadora de conversión.
 
