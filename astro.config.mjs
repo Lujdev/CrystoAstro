@@ -3,8 +3,11 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
+  output: 'server',
+  adapter: vercel(),
   site: 'https://crystodolarvzla.site/',
   build: {
     inlineStylesheets: 'auto',
