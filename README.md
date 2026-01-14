@@ -1,4 +1,4 @@
-# CrystoWeb (CrystoDolar)
+# CrystoDolar
 
 CrystoDolar es una aplicación web moderna desarrollada con **Astro** y **React** para visualizar la cotización del dólar en Venezuela en tiempo real. Obtiene tasas de diversas fuentes (BCV, Binance P2P, etc.) y ofrece herramientas como una calculadora de conversión.
 
@@ -11,7 +11,7 @@ Este proyecto utiliza un stack tecnológico moderno optimizado para rendimiento 
 - **Estilos:** [Tailwind CSS](https://tailwindcss.com) (Estilizado utilitario y sistema de diseño).
 - **Componentes UI:** [Shadcn/ui](https://ui.shadcn.com) (Componentes accesibles y personalizables).
 - **Gráficos:** [Recharts](https://recharts.org) (Visualización de historial de precios).
-- **Iconos:** [Lucide React](https://lucide.dev) & Google Material Icons.
+- **Iconos:** [Lucide React](https://lucide.dev).
 - **Tipografía:** [Inter](https://fonts.google.com/specimen/Inter) (Google Fonts).
 
 ## 📂 Estructura del Proyecto
