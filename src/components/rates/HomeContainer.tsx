@@ -112,6 +112,7 @@ export function HomeContainer({ rates }: HomeContainerProps) {
         isOpen={calculatorOpen} 
         onClose={closeCalculator}
         bcvRate={bcvUsdRate?.buy_price || 0}
+        bcvEurRate={bcvEurRate?.buy_price || 0}
         binanceRate={binanceRate?.buy_price || 0}
       />
 
