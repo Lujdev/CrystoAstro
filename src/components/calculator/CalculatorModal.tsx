@@ -246,7 +246,7 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
             <div className="flex items-center gap-1.5 mb-1">
               <Bitcoin className="w-4 h-4 text-orange-500" />
               <span className="text-xs font-medium text-orange-700 dark:text-orange-300">
-                {formatNumber(valNum)} {currency} en Binance P2P
+                {formatNumber(valNum)} $ en Binance P2P
               </span>
             </div>
             <div className="text-xl font-bold text-orange-600 dark:text-orange-400">
@@ -254,12 +254,12 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
             </div>
             {bsDifference > 0 && (
               <div className="text-xs font-medium text-green-600 dark:text-green-400">
-                +{formatNumber(bsDifference)} Bs más que BCV
+                +{formatNumber(bsDifference)} Bs (+{formatNumber(bsDifference / activeRate)} $)
               </div>
             )}
             {bsDifference < 0 && (
               <div className="text-xs font-medium text-red-600 dark:text-red-400">
-                {formatNumber(bsDifference)} Bs menos que BCV
+                {formatNumber(bsDifference)} Bs ({formatNumber(bsDifference / activeRate)} $)
               </div>
             )}
           </div>
