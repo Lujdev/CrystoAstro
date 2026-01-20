@@ -17,14 +17,33 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Merge data by date
-  const mergedData = bcvUsdData.slice(0, limit).map((bcvUsdItem) => {
+  // Helper to deduplicate and sort by date (keep latest record per day)
+  const getLatestByDate = (data: RateHistory[]) => {
+    const uniqueMap = data.reduce((acc, item) => {
+      const dateKey = new Date(item.recorded_at).toDateString();
+      if (!acc[dateKey] || new Date(item.recorded_at) > new Date(acc[dateKey].recorded_at)) {
+        acc[dateKey] = item;
+      }
+      return acc;
+    }, {} as Record<string, RateHistory>);
+    
+    return Object.values(uniqueMap).sort((a, b) => 
+      new Date(b.recorded_at).getTime() - new Date(a.recorded_at).getTime()
+    );
+  };
+
+  const cleanBcvUsd = getLatestByDate(bcvUsdData);
+  const cleanBcvEur = getLatestByDate(bcvEurData);
+  const cleanBinance = getLatestByDate(binanceData);
+
+  // Merge data by date using clean sources
+  const mergedData = cleanBcvUsd.slice(0, limit).map((bcvUsdItem) => {
     const date = new Date(bcvUsdItem.recorded_at).toDateString();
     
-    const bcvEurItem = bcvEurData.find(
+    const bcvEurItem = cleanBcvEur.find(
       (b) => new Date(b.recorded_at).toDateString() === date
     );
-    const binanceItem = binanceData.find(
+    const binanceItem = cleanBinance.find(
       (b) => new Date(b.recorded_at).toDateString() === date
     );
     

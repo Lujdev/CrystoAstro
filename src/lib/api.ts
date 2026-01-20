@@ -27,7 +27,15 @@ export async function fetchHistory(
   }
   const res = await fetch(url);
   if (!res.ok) throw new Error('Failed to fetch history');
-  const data = await res.json();
+  const data: RateHistory[] = await res.json();
+  
+  if (currencyPair) {
+    // Client-side filtering as backup if backend ignores the pair param
+    // Also handle replacing '-' back to '/' for comparison if needed, 
+    // though the API usually returns 'USD/VES' format
+    return data.filter(item => item.currency_pair === currencyPair);
+  }
+  
   return data;
 }
 
