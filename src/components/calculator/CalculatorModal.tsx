@@ -112,7 +112,7 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
   // Binance calculation logic:
   // If USD: valNum * binanceRate
   // If EUR: for now, using USDT rate as reference (paridad) or just hiding? 
-  // User asked "10,00 € en Binance P2P es tanto". Assuming 1:1 for simplicity or direct USDT conversion.
+  // User asked "10,00 € en Binance USDT es tanto". Assuming 1:1 for simplicity or direct USDT conversion.
   // Generally people convert EUR -> USDT -> BS or EUR -> USD -> BS.
   // Using direct binanceRate (USDT) for both as a close proxy for "crypto dollar" value.
   const binanceBs = valNum * binanceRate; 
@@ -246,7 +246,7 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
             <div className="flex items-center gap-1.5 mb-1">
               <Bitcoin className="w-4 h-4 text-orange-500" />
               <span className="text-xs font-medium text-orange-700 dark:text-orange-300">
-                {formatNumber(valNum)} $ en Binance P2P
+                {formatNumber(valNum)} $ en Binance USDT
               </span>
             </div>
             <div className="text-xl font-bold text-orange-600 dark:text-orange-400">
@@ -278,7 +278,7 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
             <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-2.5 border border-orange-200 dark:border-orange-800">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <Bitcoin className="w-3.5 h-3.5 text-orange-500" />
-                <span className="text-[10px] font-semibold text-orange-600 dark:text-orange-400">P2P {currency}</span>
+                <span className="text-[10px] font-semibold text-orange-600 dark:text-orange-400">BINANCE USDT</span>
               </div>
               <div className="text-base font-bold text-orange-700 dark:text-orange-300">
                 {formatNumber(binanceRate)} Bs

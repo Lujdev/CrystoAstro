@@ -51,7 +51,7 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
     const bcvEurPrice = bcvEurItem?.buy_price || 0;
     const binancePrice = binanceItem?.buy_price || 0;
     
-    // Gap between Binance P2P and BCV USD
+    // Gap between Binance USDT and BCV USD
     const gap = binancePrice && bcvUsdPrice 
       ? ((binancePrice - bcvUsdPrice) / bcvUsdPrice * 100)
       : 0;
@@ -154,7 +154,7 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
                 BCV EUR
               </th>
               <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">
-                BINANCE P2P
+                BINANCE USDT
               </th>
               <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 BRECHA

@@ -156,14 +156,14 @@ export function HomeContainer({ rates }: HomeContainerProps) {
           </div>
         )}
 
-        {/* Binance P2P Rate Card */}
+        {/* Binance USDT Rate Card */}
         {binanceRate && (
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-yellow-100 dark:bg-yellow-900/50 p-2.5 rounded-xl">
                 <Bitcoin className="w-5 h-5 text-yellow-600 dark:text-yellow-500" />
               </div>
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Binance P2P</span>
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Binance USDT</span>
             </div>
             <div className="space-y-2">
               <div className="text-3xl font-bold text-slate-900 dark:text-white">
