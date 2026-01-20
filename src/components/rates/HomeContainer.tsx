@@ -187,7 +187,7 @@ export function HomeContainer({ rates }: HomeContainerProps) {
           <div className="relative">
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Brecha Cambiaria</span>
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">OFICIAL VS PARALELO</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">OFICIAL VS BINANCE</span>
             </div>
             <div className="text-center py-2">
               <div className="text-4xl sm:text-5xl font-bold text-orange-600 dark:text-orange-400">

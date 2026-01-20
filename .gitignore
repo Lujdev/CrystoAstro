@@ -24,3 +24,9 @@ pnpm-debug.log*
 .idea/
 
 /GuiaDiseño
+.vercel/
+build.log
+design/
+nul
+.agent/
+!.agent/workflows/
