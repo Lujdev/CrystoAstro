@@ -26,6 +26,7 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, binanceRate }: Calcu
   const [usdValue, setUsdValue] = useState<string>('1');
   const [bsValue, setBsValue] = useState<string>('');
   const [activeField, setActiveField] = useState<'USD' | 'BS'>('USD');
+  const [isInverted, setIsInverted] = useState(false); // USD arriba = false, Bs arriba = true
 
   // Calculate conversions when USD value changes
   useEffect(() => {
@@ -67,13 +68,9 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, binanceRate }: Calcu
     setBsValue(value);
   };
 
-  // Swap values
+  // Swap position (invert display order)
   const handleSwap = () => {
-    const tempUsd = usdValue;
-    const tempBs = bsValue;
-    setUsdValue(tempBs);
-    setBsValue(tempUsd);
-    setActiveField(activeField === 'USD' ? 'BS' : 'USD');
+    setIsInverted(!isInverted);
   };
 
   const usdNum = parseInput(usdValue);
@@ -84,6 +81,56 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, binanceRate }: Calcu
   const bsDifference = binanceBs - bcvBs;
 
   if (!isOpen) return null;
+
+  // USD Input Component
+  const UsdInput = (
+    <div>
+      <label className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mb-1 block uppercase tracking-wider">
+        Dólares (USD)
+      </label>
+      <div className="relative">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center">
+          <DollarSign className="w-4 h-4 text-green-600 dark:text-green-400" />
+        </div>
+        <input
+          type="text"
+          value={usdValue}
+          onChange={handleUsdChange}
+          onFocus={() => setActiveField('USD')}
+          placeholder="0.00"
+          className="w-full pl-14 pr-14 py-3 text-xl font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition-colors"
+        />
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+          USD
+        </span>
+      </div>
+    </div>
+  );
+
+  // BS Input Component
+  const BsInput = (
+    <div>
+      <label className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mb-1 block uppercase tracking-wider">
+        Bolívares (Bs) - Tasa BCV
+      </label>
+      <div className="relative">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center">
+          <Banknote className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+        </div>
+        <input
+          type="text"
+          value={bsValue}
+          onChange={handleBsChange}
+          onFocus={() => setActiveField('BS')}
+          placeholder="0.00"
+          className="w-full pl-14 pr-14 py-3 text-xl font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition-colors"
+        />
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+          Bs
+        </span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
@@ -113,61 +160,21 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, binanceRate }: Calcu
         </div>
 
         <div className="p-4 space-y-3">
-          {/* USD Input - Compact */}
-          <div>
-            <label className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mb-1 block uppercase tracking-wider">
-              Dólares (USD)
-            </label>
-            <div className="relative">
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center">
-                <DollarSign className="w-4 h-4 text-green-600 dark:text-green-400" />
-              </div>
-              <input
-                type="text"
-                value={usdValue}
-                onChange={handleUsdChange}
-                onFocus={() => setActiveField('USD')}
-                placeholder="0.00"
-                className="w-full pl-14 pr-14 py-3 text-xl font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition-colors"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
-                USD
-              </span>
-            </div>
-          </div>
+          {/* First Input - depends on isInverted */}
+          {isInverted ? BsInput : UsdInput}
 
           {/* Swap Button - Compact */}
           <div className="flex justify-center -my-1">
             <button
               onClick={handleSwap}
-              className="p-2 bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-800/50 rounded-full transition-all hover:scale-110 active:scale-95"
+              className={`p-2 bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-800/50 rounded-full transition-all hover:scale-110 active:scale-95 ${isInverted ? 'rotate-180' : ''}`}
             >
               <ArrowUpDown className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </button>
           </div>
 
-          {/* BS Input - Compact */}
-          <div>
-            <label className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mb-1 block uppercase tracking-wider">
-              Bolívares (Bs) - Tasa BCV
-            </label>
-            <div className="relative">
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center">
-                <Banknote className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              </div>
-              <input
-                type="text"
-                value={bsValue}
-                onChange={handleBsChange}
-                onFocus={() => setActiveField('BS')}
-                placeholder="0.00"
-                className="w-full pl-14 pr-14 py-3 text-xl font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition-colors"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
-                Bs
-              </span>
-            </div>
-          </div>
+          {/* Second Input - depends on isInverted */}
+          {isInverted ? UsdInput : BsInput}
 
           {/* Binance comparison - Compact */}
           <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 rounded-xl p-3 border border-orange-200 dark:border-orange-800">

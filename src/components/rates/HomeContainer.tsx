@@ -220,10 +220,11 @@ export function HomeContainer({ rates }: HomeContainerProps) {
             </div>
             <button 
               onClick={openCalculator}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-800/50 transition-colors border border-blue-200 dark:border-blue-800"
               aria-label="Abrir calculadora"
             >
-              <Calculator className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+              <Calculator className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Calculadora</span>
             </button>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
