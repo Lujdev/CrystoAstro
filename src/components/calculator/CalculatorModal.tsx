@@ -278,7 +278,7 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
             <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-2.5 border border-orange-200 dark:border-orange-800">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <Bitcoin className="w-3.5 h-3.5 text-orange-500" />
-                <span className="text-[10px] font-semibold text-orange-600 dark:text-orange-400">P2P {currency}</span>
+                <span className="text-[10px] font-semibold text-orange-600 dark:text-orange-400">P2P USDT</span>
               </div>
               <div className="text-base font-bold text-orange-700 dark:text-orange-300">
                 {formatNumber(binanceRate)} Bs
