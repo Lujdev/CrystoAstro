@@ -19,8 +19,13 @@ export async function fetchRatesByExchange(exchange: string): Promise<Rate[]> {
 export async function fetchHistory(
   exchangeCode: string,
   days: number = 30,
+  currencyPair?: string,
 ): Promise<RateHistory[]> {
-  const res = await fetch(`${API_BASE}/api/v1/rates/history/${exchangeCode}?days=${days}`);
+  let url = `${API_BASE}/api/v1/rates/history/${exchangeCode}?days=${days}`;
+  if (currencyPair) {
+    url += `&pair=${currencyPair.replace('/', '-')}`;
+  }
+  const res = await fetch(url);
   if (!res.ok) throw new Error('Failed to fetch history');
   const data = await res.json();
   return data;
