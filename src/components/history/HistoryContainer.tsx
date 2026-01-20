@@ -56,7 +56,7 @@ export function HistoryContainer({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="BCV">BCV</SelectItem>
-              <SelectItem value="BINANCE_P2P">Binance USDT</SelectItem>
+              <SelectItem value="BINANCE_P2P">Binance P2P</SelectItem>
               <SelectItem value="ITALCAMBIOS">Italcambios</SelectItem>
             </SelectContent>
           </Select>
