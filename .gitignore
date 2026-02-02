@@ -30,3 +30,4 @@ design/
 nul
 .agent/
 !.agent/workflows/
+.agents/

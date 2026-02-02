@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -10,9 +10,10 @@ interface RecentHistoryProps {
   bcvEurData: RateHistory[];
   binanceData: RateHistory[];
   limit?: number;
+  loading?: boolean;
 }
 
-export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 }: RecentHistoryProps) {
+export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18, loading }: RecentHistoryProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -37,7 +38,7 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
   const cleanBinance = getLatestByDate(binanceData);
 
   // Merge data by date using clean sources
-  const mergedData = cleanBcvUsd.slice(0, limit).map((bcvUsdItem) => {
+  const realMergedData = cleanBcvUsd.slice(0, limit).map((bcvUsdItem) => {
     const date = new Date(bcvUsdItem.recorded_at).toDateString();
     
     const bcvEurItem = cleanBcvEur.find(
@@ -62,8 +63,26 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
       bcvEur: bcvEurPrice,
       binance: binancePrice,
       gap: gap,
+      isSkeleton: false,
     };
   }).sort((a, b) => b.date.getTime() - a.date.getTime());
+
+  // If loading and we need more rows to match the limit, fill with skeletons
+  // This prevents the "shifting down" jump when data finally arrives
+  const mergedData = useMemo(() => {
+    if (loading && realMergedData.length < limit) {
+      const skeletons = Array.from({ length: limit - realMergedData.length }).map((_, i) => ({
+        date: new Date(),
+        bcvUsd: 0,
+        bcvEur: 0,
+        binance: 0,
+        gap: 0,
+        isSkeleton: true,
+      }));
+      return [...realMergedData, ...skeletons];
+    }
+    return realMergedData;
+  }, [realMergedData, loading, limit]);
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -84,44 +103,19 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+    <div className="group relative overflow-hidden bg-white/70 dark:bg-slate-900/70 backdrop-blur-md rounded-3xl border border-white/20 dark:border-slate-800/50 shadow-2xl shadow-black/5">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="bg-slate-100 dark:bg-slate-800 p-1.5 sm:p-2 rounded-lg">
-            <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 dark:text-slate-400" />
+      <div className="flex items-center justify-between px-6 py-5 border-b border-slate-200/50 dark:border-slate-800/50">
+        <div className="flex items-center gap-3">
+          <div className="bg-slate-100 dark:bg-slate-800 p-2 rounded-xl group-hover:rotate-12 transition-transform duration-500">
+            <Clock className="w-5 h-5 text-slate-600 dark:text-slate-400" />
           </div>
-          <h3 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white">
-            Historial Reciente
+          <h3 className="text-lg font-black text-slate-900 dark:text-white tracking-tight uppercase tracking-[0.1em]">
+            Historial de Cotizaciones
           </h3>
         </div>
-        <div className="flex items-center gap-2">
-          {/* Scroll buttons for mobile */}
-          <div className="flex items-center gap-1 sm:hidden">
-            <button
-              onClick={() => scrollTo('left')}
-              disabled={!canScrollLeft}
-              className={`p-1.5 rounded-lg transition-colors ${
-                canScrollLeft 
-                  ? 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400' 
-                  : 'text-slate-300 dark:text-slate-600'
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => scrollTo('right')}
-              disabled={!canScrollRight}
-              className={`p-1.5 rounded-lg transition-colors ${
-                canScrollRight 
-                  ? 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400' 
-                  : 'text-slate-300 dark:text-slate-600'
-              }`}
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-          <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 sm:px-3 py-1 rounded-full">
+        <div className="flex items-center gap-4">
+          <span className="hidden sm:inline-flex text-[10px] font-black text-slate-400 uppercase tracking-widest bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700">
             {mergedData.length} registros
           </span>
         </div>
@@ -138,65 +132,67 @@ export function RecentHistory({ bcvUsdData, bcvEurData, binanceData, limit = 18 
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent"
+        className={`overflow-x-auto scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent transition-opacity duration-300 ${loading ? 'opacity-40 animate-pulse pointer-events-none' : 'opacity-100'}`}
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         <table className="w-full min-w-[500px]">
           <thead>
-            <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
-              <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider sticky left-0 bg-slate-50 dark:bg-slate-800/50 z-10">
+            <tr className="bg-slate-50/80 dark:bg-slate-800/80 border-b border-slate-200/50 dark:border-slate-700">
+              <th className="px-3 sm:px-4 py-3 text-left text-[10px] sm:text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] sticky left-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md z-10 border-r border-slate-200/50 dark:border-slate-800/50">
                 FECHA
               </th>
-              <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">
+              <th className="px-3 sm:px-4 py-3 text-right text-[10px] sm:text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] whitespace-nowrap">
                 BCV USD
               </th>
-              <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">
+              <th className="px-3 sm:px-4 py-3 text-right text-[10px] sm:text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] whitespace-nowrap">
                 BCV EUR
               </th>
-              <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">
-                BINANCE P2P
+              <th className="px-3 sm:px-4 py-3 text-right text-[10px] sm:text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] whitespace-nowrap">
+                BINANCE USDT
               </th>
-              <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th className="px-3 sm:px-4 py-3 text-right text-[10px] sm:text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">
                 BRECHA
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-            {mergedData.map((item, index) => (
+            {mergedData.map((item: any, index: number) => (
               <tr 
                 key={index} 
-                className="hover:bg-blue-50/50 dark:hover:bg-slate-800/50 transition-colors"
+                className={`transition-colors ${item.isSkeleton ? 'pointer-events-none' : 'hover:bg-blue-50/50 dark:hover:bg-slate-800/50'}`}
               >
-                <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap sticky left-0 bg-white dark:bg-slate-900 z-10">
+                <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap sticky left-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md z-10 border-r border-slate-200/50 dark:border-slate-800/50">
                   <div className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-slate-400 hidden sm:block" />
                     <span className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
-                      {format(item.date, 'd MMM. yyyy', { locale: es })}
+                      {!item.isSkeleton && format(item.date, 'd MMM. yyyy', { locale: es })}
+                      {item.isSkeleton && '...'}
                     </span>
                   </div>
                 </td>
                 <td className="px-3 sm:px-4 py-2.5 text-right whitespace-nowrap">
                   <span className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400">
-                    {formatBs(item.bcvUsd)} Bs
+                    {!item.isSkeleton ? `${formatBs(item.bcvUsd)} Bs` : '...'}
                   </span>
                 </td>
                 <td className="px-3 sm:px-4 py-2.5 text-right whitespace-nowrap">
                   <span className="text-xs sm:text-sm font-bold text-purple-600 dark:text-purple-400">
-                    {item.bcvEur ? `${formatBs(item.bcvEur)} Bs` : '-'}
+                    {item.isSkeleton ? '...' : (item.bcvEur ? `${formatBs(item.bcvEur)} Bs` : '-')}
                   </span>
                 </td>
                 <td className="px-3 sm:px-4 py-2.5 text-right whitespace-nowrap">
-                  <span className="text-xs sm:text-sm font-bold text-orange-500 dark:text-orange-400">
-                    {item.binance ? `${formatBs(item.binance)} Bs` : '-'}
+                  <span className="text-xs sm:text-sm font-bold text-orange-600 dark:text-orange-400">
+                    {!item.isSkeleton ? `${formatBs(item.binance)} Bs` : '...'}
                   </span>
                 </td>
                 <td className="px-3 sm:px-4 py-2.5 text-right whitespace-nowrap">
-                  <span className={`text-xs sm:text-sm font-bold ${
+                  <span className={`text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full ${
+                    item.isSkeleton ? 'bg-slate-100 dark:bg-slate-800' :
                     item.gap >= 0 
-                      ? 'text-emerald-600 dark:text-emerald-400' 
-                      : 'text-red-600 dark:text-red-400'
+                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
+                      : 'bg-red-500/10 text-red-600 dark:text-red-400'
                   }`}>
-                    {item.gap.toFixed(2)}%
+                    {!item.isSkeleton ? `${item.gap.toFixed(2)}%` : '...'}
                   </span>
                 </td>
               </tr>
