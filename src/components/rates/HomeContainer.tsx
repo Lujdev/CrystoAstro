@@ -105,7 +105,7 @@ export function HomeContainer({ rates }: HomeContainerProps) {
   const closeCalculator = useCallback(() => setCalculatorOpen(false), []);
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full min-h-screen overflow-x-hidden">
       {/* Ambient background glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-400/10 dark:bg-blue-600/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-indigo-400/10 dark:bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none"></div>

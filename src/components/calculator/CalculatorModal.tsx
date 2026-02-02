@@ -125,15 +125,15 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
 
   if (!isOpen) return null;
 
-  // Foreign Input Component
+  // Foreign Input Component - Compact
   const ForeignInput = (
     <div className="group">
-      <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 block uppercase tracking-[0.1em]">
+      <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 block uppercase tracking-wider">
         {currency === 'USDT' ? 'USDT (Tether)' : (currency === 'USD' ? 'Dólares (USD)' : 'Euros (EUR)')}
       </label>
       <div className="relative">
-        <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 group-focus-within:scale-110 ${currencyBgClass}`}>
-          <CurrencyIcon className={`w-5 h-5 ${currencyColorClass}`} />
+        <div className={`absolute left-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-300 group-focus-within:scale-110 ${currencyBgClass}`}>
+          <CurrencyIcon className={`w-4 h-4 ${currencyColorClass}`} />
         </div>
         <input
           type="text"
@@ -141,28 +141,28 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
           onChange={handleForeignChange}
           onFocus={() => setActiveField('FOREIGN')}
           placeholder="0.00"
-          className={`w-full pl-16 pr-14 py-4 text-2xl font-black text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-2xl outline-none transition-all duration-300 ${
-            currency === 'USDT' ? 'focus:border-teal-500/50 focus:ring-4 focus:ring-teal-500/10' : 
-            currency === 'USD' ? 'focus:border-green-500/50 focus:ring-4 focus:ring-green-500/10' : 
-            'focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10'
+          className={`w-full pl-12 pr-12 py-2.5 text-xl font-black text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-xl outline-none transition-all duration-300 ${
+            currency === 'USDT' ? 'focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/10' : 
+            currency === 'USD' ? 'focus:border-green-500/50 focus:ring-2 focus:ring-green-500/10' : 
+            'focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/10'
           }`}
         />
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-black text-slate-400 tracking-tighter">
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black text-slate-400">
           {currency}
         </span>
       </div>
     </div>
   );
 
-  // BS Input Component
+  // BS Input Component - Compact
   const BsInput = (
     <div className="group">
-      <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 block uppercase tracking-[0.1em]">
+      <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 block uppercase tracking-wider">
         Bolívares (Bs) - {currency === 'USDT' ? 'Tasa P2P' : 'Tasa BCV'}
       </label>
       <div className="relative">
-        <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-9 h-9 bg-blue-100 dark:bg-blue-900/50 rounded-xl flex items-center justify-center transition-all duration-300 group-focus-within:scale-110">
-          <Banknote className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+        <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 h-7 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center transition-all duration-300 group-focus-within:scale-110">
+          <Banknote className="w-4 h-4 text-blue-600 dark:text-blue-400" />
         </div>
         <input
           type="text"
@@ -170,9 +170,9 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
           onChange={handleBsChange}
           onFocus={() => setActiveField('BS')}
           placeholder="0.00"
-          className="w-full pl-16 pr-14 py-4 text-2xl font-black text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-2xl focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300"
+          className="w-full pl-12 pr-12 py-2.5 text-xl font-black text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-xl focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 outline-none transition-all duration-300"
         />
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-black text-slate-400 tracking-tighter">
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black text-slate-400">
           Bs
         </span>
       </div>
@@ -180,71 +180,71 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
       
-      {/* Modal - Compact for mobile */}
-      <div className="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-[2rem] shadow-2xl w-full max-w-sm overflow-hidden border border-white/20 dark:border-slate-700/50 ring-1 ring-black/5 dark:ring-white/5">
+      {/* Modal - Ultra Compact for mobile */}
+      <div className="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl w-full max-w-[340px] overflow-hidden border border-white/20 dark:border-slate-700/50">
         {/* Header - Compact */}
-        <div className="flex items-center justify-between px-6 py-5 bg-gradient-to-br from-blue-600 via-indigo-600 to-indigo-700">
+        <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-br from-blue-600 via-indigo-600 to-indigo-700">
           <div className="relative">
-            <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
-              <Calculator className="w-5 h-5 opacity-90" />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-50 to-white/90">Calculadora</span>
+            <h2 className="text-base font-black text-white tracking-tight flex items-center gap-1.5">
+              <Calculator className="w-4 h-4 opacity-90" />
+              <span>Calculadora</span>
             </h2>
-            <div className="flex gap-4 mt-1 text-[11px] font-bold text-blue-100/90 uppercase tracking-widest">
+            <div className="flex gap-3 mt-0.5 text-[9px] font-bold text-blue-100/90 uppercase tracking-wider">
               {currency === 'USDT' 
-                ? <span className="flex items-center gap-1.5"><Bitcoin className="w-3 h-3" /> P2P: {formatNumber(binanceRate)}</span>
-                : <><span className="flex items-center gap-1.5"><Landmark className="w-3 h-3" /> BCV: {formatNumber(activeRate)}</span>{currency === 'USD' && <span className="flex items-center gap-1.5 opacity-80"><Bitcoin className="w-3 h-3" /> P2P: {formatNumber(binanceRate)}</span>}</>}
+                ? <span className="flex items-center gap-1"><Bitcoin className="w-2.5 h-2.5" /> P2P: {formatNumber(binanceRate)}</span>
+                : <><span className="flex items-center gap-1"><Landmark className="w-2.5 h-2.5" /> BCV: {formatNumber(activeRate)}</span>{currency === 'USD' && <span className="flex items-center gap-1 opacity-80"><Bitcoin className="w-2.5 h-2.5" /> P2P: {formatNumber(binanceRate)}</span>}</>}
             </div>
           </div>
           <button 
             onClick={onClose}
-            className="p-2.5 bg-white/10 hover:bg-white/20 rounded-2xl transition-all duration-300 hover:rotate-90 active:scale-90"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-xl transition-all duration-300 hover:rotate-90 active:scale-90"
            >
-            <X className="w-5 h-5 text-white" />
+            <X className="w-4 h-4 text-white" />
           </button>
         </div>
 
-        <div className="p-6 space-y-5">
-          {/* Currency Tabs - Premium Sliding Indicator */}
-          <div className="relative p-1.5 bg-slate-100 dark:bg-slate-800/80 rounded-2xl flex items-center">
+        <div className="p-4 space-y-3">
+          {/* Currency Tabs - Compact */}
+          <div className="relative p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl flex items-center">
             {/* Sliding Background */}
             <div 
-              className={`absolute top-1.5 bottom-1.5 w-[calc(33.33%-3px)] bg-white dark:bg-slate-700 rounded-xl shadow-lg shadow-black/5 transition-all duration-500 ease-out-expo ${
-                currency === 'USD' ? 'left-1.5' : currency === 'EUR' ? 'left-[33.33%]' : 'left-[66.66%]'
+              className={`absolute top-1 bottom-1 w-[calc(33.33%-3px)] bg-white dark:bg-slate-700 rounded-lg shadow-md transition-all duration-500 ${
+                currency === 'USD' ? 'left-1' : currency === 'EUR' ? 'left-[33.33%]' : 'left-[66.66%]'
               }`}
             />
             
             <button
               onClick={() => setCurrency('USD')}
-              className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 text-[11px] font-black tracking-widest uppercase transition-all duration-300 ${
-                currency === 'USD' ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600'
+              className={`relative z-10 flex-1 flex items-center justify-center gap-1.5 py-2 text-[10px] font-black tracking-wider uppercase transition-all duration-300 ${
+                currency === 'USD' ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'
               }`}
             >
-              <DollarSign className={`w-3.5 h-3.5 transition-transform ${currency === 'USD' ? 'scale-110' : ''}`} />
+              <DollarSign className="w-3 h-3" />
               USD
             </button>
             <button
               onClick={() => setCurrency('EUR')}
-              className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 text-[11px] font-black tracking-widest uppercase transition-all duration-300 ${
-                currency === 'EUR' ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600'
+              className={`relative z-10 flex-1 flex items-center justify-center gap-1.5 py-2 text-[10px] font-black tracking-wider uppercase transition-all duration-300 ${
+                currency === 'EUR' ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'
               }`}
             >
-              <Euro className={`w-3.5 h-3.5 transition-transform ${currency === 'EUR' ? 'scale-110' : ''}`} />
+              <Euro className="w-3 h-3" />
               EUR
             </button>
             <button
               onClick={() => setCurrency('USDT')}
-              className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 text-[11px] font-black tracking-widest uppercase transition-all duration-300 ${
-                currency === 'USDT' ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600'
+              className={`relative z-10 flex-1 flex items-center justify-center gap-1.5 py-2 text-[10px] font-black tracking-wider uppercase transition-all duration-300 ${
+                currency === 'USDT' ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'
               }`}
             >
-              <Bitcoin className={`w-3.5 h-3.5 transition-transform ${currency === 'USDT' ? 'scale-110' : ''}`} />
+              <Bitcoin className="w-3 h-3" />
               USDT
             </button>
           </div>
@@ -252,99 +252,89 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
           {/* First Input - depends on isInverted */}
           {isInverted ? BsInput : ForeignInput}
 
-          {/* Swap Button - Compact */}
-          <div className="flex justify-center -my-2.5 relative z-20">
+          {/* Swap Button - Ultra Compact */}
+          <div className="flex justify-center -my-1.5 relative z-20">
             <button
               onClick={handleSwap}
-              className={`p-3 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-2xl shadow-lg shadow-blue-500/20 transition-all duration-500 hover:scale-110 active:rotate-180 active:scale-95 border-2 border-white dark:border-slate-800 ${isInverted ? 'rotate-180' : ''}`}
+              className={`p-2 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-500 hover:scale-110 active:rotate-180 active:scale-95 border-2 border-white dark:border-slate-800 ${isInverted ? 'rotate-180' : ''}`}
             >
-              <ArrowUpDown className="w-5 h-5 text-white" />
+              <ArrowUpDown className="w-4 h-4 text-white" />
             </button>
           </div>
 
           {/* Second Input - depends on isInverted */}
           {isInverted ? ForeignInput : BsInput}
 
-          {/* Binance comparison - Only show when NOT in USDT mode */}
+          {/* Binance comparison - Compact - Only show when NOT in USDT mode */}
           {currency !== 'USDT' && (
-            <div className="relative group overflow-hidden bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-[1.5rem] p-4 border border-orange-200 dark:border-orange-800/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/5">
-              <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-150 duration-700">
-                <Bitcoin size={100} />
+            <div className="relative overflow-hidden bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl p-3 border border-orange-200 dark:border-orange-800/50">
+              <div className="absolute -right-2 -top-2 opacity-5">
+                <Bitcoin size={60} />
               </div>
-              <div className="flex items-center gap-2 mb-1.5 text-orange-700 dark:text-orange-300">
-                <div className="p-1 bg-orange-100 dark:bg-orange-800 rounded-lg">
-                  <Bitcoin size={14} className="animate-pulse" />
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-1.5 mb-0.5 text-orange-700 dark:text-orange-300">
+                    <Bitcoin size={12} />
+                    <span className="text-[9px] font-black uppercase tracking-wider">
+                      {formatNumber(valNum)} $ en P2P
+                    </span>
+                  </div>
+                  <div className="text-xl font-black text-orange-600 dark:text-orange-400">
+                    {formatNumber(binanceBs)} <span className="text-xs font-bold opacity-70">Bs</span>
+                  </div>
                 </div>
-                <span className="text-[11px] font-black uppercase tracking-wider">
-                  {formatNumber(valNum)} $ en Binance USDT
-                </span>
+                {bsDifference !== 0 && (
+                  <div className={`px-2 py-1 rounded-lg text-[9px] font-black ${
+                    bsDifference > 0 ? 'bg-green-100 text-green-700 dark:bg-green-900/30' : 'bg-red-100 text-red-700 dark:bg-red-900/30'
+                  }`}>
+                    {bsDifference > 0 ? '+' : ''}{formatNumber(bsDifference / activeRate)} $
+                  </div>
+                )}
               </div>
-              <div className="text-2xl font-black text-orange-600 dark:text-orange-400 tracking-tight">
-                {formatNumber(binanceBs)} <span className="text-sm font-bold opacity-70">Bs</span>
-              </div>
-              {bsDifference !== 0 && (
-                <div className={`mt-1.5 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tight ${
-                  bsDifference > 0 ? 'bg-green-100 text-green-700 dark:bg-green-900/30' : 'bg-red-100 text-red-700 dark:bg-red-900/30'
-                }`}>
-                  {bsDifference > 0 ? '+' : ''}{formatNumber(bsDifference)} Bs 
-                  <span className="opacity-60 mx-1">•</span> 
-                  {bsDifference > 0 ? '+' : ''}{formatNumber(bsDifference / activeRate)} $
-                </div>
-              )}
             </div>
           )}
 
-          {/* Quick reference - Compact grid - Updates based on currency */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* Quick reference - Ultra Compact grid */}
+          <div className="grid grid-cols-2 gap-2">
             {currency === 'USDT' ? (
-              /* USDT mode: Show BCV USD and BCV EUR equivalents */
               <>
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-2xl p-3.5 border border-green-200 dark:border-green-800/50 shadow-sm transition-all hover:-translate-y-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="p-1 bg-green-100 dark:bg-green-800 rounded-md">
-                      <Landmark className="w-3 h-3 text-green-600 dark:text-green-400" />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-green-600">BCV $</span>
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl p-2.5 border border-green-200 dark:border-green-800/50">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Landmark className="w-2.5 h-2.5 text-green-600 dark:text-green-400" />
+                    <span className="text-[9px] font-black uppercase tracking-wider text-green-600">BCV $</span>
                   </div>
-                  <div className="text-lg font-black text-green-700 dark:text-green-300 tracking-tight">
-                    {formatNumber(valNum * bcvRate)} <span className="text-xs font-bold opacity-60">Bs</span>
+                  <div className="text-base font-black text-green-700 dark:text-green-300">
+                    {formatNumber(valNum * bcvRate)} <span className="text-[10px] font-bold opacity-60">Bs</span>
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-2xl p-3.5 border border-purple-200 dark:border-purple-800/50 shadow-sm transition-all hover:-translate-y-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="p-1 bg-purple-100 dark:bg-purple-800 rounded-md">
-                      <Landmark className="w-3 h-3 text-purple-600 dark:text-purple-400" />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 text-purple-600">BCV €</span>
+                <div className="bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl p-2.5 border border-purple-200 dark:border-purple-800/50">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Landmark className="w-2.5 h-2.5 text-purple-600 dark:text-purple-400" />
+                    <span className="text-[9px] font-black uppercase tracking-wider text-purple-600">BCV €</span>
                   </div>
-                  <div className="text-lg font-black text-purple-700 dark:text-purple-300 tracking-tight">
-                    {formatNumber(valNum * bcvEurRate)} <span className="text-xs font-bold opacity-60">Bs</span>
+                  <div className="text-base font-black text-purple-700 dark:text-purple-300">
+                    {formatNumber(valNum * bcvEurRate)} <span className="text-[10px] font-bold opacity-60">Bs</span>
                   </div>
                 </div>
               </>
             ) : (
-              /* USD/EUR mode: Show BCV rate and P2P USDT rate */
               <>
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-2xl p-3.5 border border-blue-200 dark:border-blue-800/50 shadow-sm transition-all hover:-translate-y-1">
-                  <div className="flex items-center gap-2 mb-1 text-blue-600">
-                    <div className="p-1 bg-blue-100 dark:bg-blue-800 rounded-md">
-                      <Landmark className="w-3 h-3" />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest">BCV {currency}</span>
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-2.5 border border-blue-200 dark:border-blue-800/50">
+                  <div className="flex items-center gap-1.5 mb-0.5 text-blue-600">
+                    <Landmark className="w-2.5 h-2.5" />
+                    <span className="text-[9px] font-black uppercase tracking-wider">BCV {currency}</span>
                   </div>
-                  <div className="text-lg font-black text-blue-700 dark:text-blue-300 tracking-tight">
-                    {formatNumber(activeRate)} <span className="text-xs font-bold opacity-60">Bs</span>
+                  <div className="text-base font-black text-blue-700 dark:text-blue-300">
+                    {formatNumber(activeRate)} <span className="text-[10px] font-bold opacity-60">Bs</span>
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-2xl p-3.5 border border-orange-200 dark:border-orange-800/50 shadow-sm transition-all hover:-translate-y-1">
-                  <div className="flex items-center gap-2 mb-1 text-orange-600">
-                    <div className="p-1 bg-orange-100 dark:bg-orange-800 rounded-md">
-                      <Bitcoin className="w-3 h-3" />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest">P2P USDT</span>
+                <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl p-2.5 border border-orange-200 dark:border-orange-800/50">
+                  <div className="flex items-center gap-1.5 mb-0.5 text-orange-600">
+                    <Bitcoin className="w-2.5 h-2.5" />
+                    <span className="text-[9px] font-black uppercase tracking-wider">P2P USDT</span>
                   </div>
-                  <div className="text-lg font-black text-orange-700 dark:text-orange-300 tracking-tight">
-                    {formatNumber(binanceRate)} <span className="text-xs font-bold opacity-60">Bs</span>
+                  <div className="text-base font-black text-orange-700 dark:text-orange-300">
+                    {formatNumber(binanceRate)} <span className="text-[10px] font-bold opacity-60">Bs</span>
                   </div>
                 </div>
               </>
