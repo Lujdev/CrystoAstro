@@ -284,10 +284,11 @@ export function CalculatorModal({ isOpen, onClose, bcvRate, bcvEurRate, binanceR
                   </div>
                 </div>
                 {bsDifference !== 0 && (
-                  <div className={`px-2 py-1 rounded-lg text-[9px] font-black ${
+                  <div className={`px-2 py-1 rounded-lg text-[9px] font-black text-center ${
                     bsDifference > 0 ? 'bg-green-100 text-green-700 dark:bg-green-900/30' : 'bg-red-100 text-red-700 dark:bg-red-900/30'
                   }`}>
-                    {bsDifference > 0 ? '+' : ''}{formatNumber(bsDifference / activeRate)} $
+                    <div>{bsDifference > 0 ? '+' : ''}{formatNumber(bsDifference)} Bs</div>
+                    <div className="opacity-70">{bsDifference > 0 ? '+' : ''}{formatNumber(bsDifference / activeRate)} $</div>
                   </div>
                 )}
               </div>
